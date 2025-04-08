@@ -56,7 +56,7 @@ function generateTemplateHTML(file, img, result, index) {
       break;
 
     case "component":
-      formattedText = `<img class="lazy absolute ${className}" data-src="images/${file.name}" width="${img.width}" height="${img.height}">`;
+      formattedText = `<img class="lazy absolute ${className}" data-src="images/${file.name}" width="${img.width}" height="${img.height}" src="./images/${file.name}">`;
       break;
 
     default:
@@ -86,17 +86,27 @@ cssButton.addEventListener("click", () => {
   const result = imagesArray.map((img) => {
     const arr = img.split(" ");
     const className = arr[3].slice(0, -1);
-    const width =
-      Number(arr[5].slice(7, -1)) >= 1000
-        ? "100"
-        : (Number(arr[5].slice(7, -1)) / 10).toFixed(1);
-    const format = `
+    const width = Number(arr[5].slice(7, -1) / 10).toFixed(1);
+    const scale = Number(arr[5].slice(7, -1) / 1000).toFixed(3);
+
+    const format =
+      Number(width) * 10 > 1000
+        ? `
+.${className} {
+  width: 100%;
+  top: 0%;
+  left: 0%;
+  scale: ${scale};
+}
+`
+        : `
 .${className} {
   width: ${width}%;
   top: 0%;
   left: 0%;
 }
-        `;
+`;
+
     return format;
   });
   cssoutput.value = result.join("");
@@ -117,7 +127,7 @@ htmlcopy.addEventListener("click", () => {
   }, 2000);
 });
 
-// 複製HTML Clipboard API
+// 複製CSS Clipboard API
 csscopy.addEventListener("click", () => {
   navigator.clipboard.readText();
   navigator.clipboard.writeText(cssoutput.value);
