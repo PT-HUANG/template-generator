@@ -6,26 +6,26 @@
 }
 
 .selection,
-#upload,
-#CSS_generator {
+#upload_IMG,
+#generate_CSS {
   margin: 1rem 0;
 }
 
-#upload {
+#upload_IMG {
   width: 30%;
 }
 
-#template {
+#select_Template {
   width: 10%;
   padding: 5px;
 }
 
-#CSS_generator {
+#generate_CSS {
   width: fit-content;
 }
 
-#output,
-#CSS_output {
+#textarea_HTML,
+#textarea_CSS {
   width: 80%;
   margin: 1rem 0;
 }

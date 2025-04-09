@@ -1,30 +1,29 @@
 // 變數定義
-const upload = document.getElementById("upload");
-const output = document.getElementById("output");
+const select_Template = document.querySelector("#select_Template");
+const upload_IMG = document.getElementById("upload_IMG");
+const generate_CSS = document.getElementById("generate_CSS");
 
-const cssButton = document.getElementById("CSS_generator");
-const cssoutput = document.getElementById("CSS_output");
+const textarea_HTML = document.getElementById("textarea_HTML");
+const textarea_CSS = document.getElementById("textarea_CSS");
 
-const htmlcopy = document.getElementById("copyButton_HTML");
-const csscopy = document.getElementById("copyButton_CSS");
+const copy_HTML = document.getElementById("copy_HTML");
+const copy_CSS = document.getElementById("copy_CSS");
 
-const htmlmessage = document.querySelector(".sucessMessage_HTML");
-const cssmessage = document.querySelector(".sucessMessage_CSS");
+const sucessMessage_HTML = document.querySelector(".sucessMessage_HTML");
+const sucessMessage_CSS = document.querySelector(".sucessMessage_CSS");
 
 // 根據選擇來決定要套用哪種模板
 let selectedMode = "section";
-const template = document.querySelector("#template");
-template.addEventListener("change", (e) => {
+select_Template.addEventListener("change", (e) => {
   selectedMode = e.target.value;
-  htmlcopy.disabled = true;
   if (selectedMode === "section") {
-    cssButton.disabled = true;
-    csscopy.disabled = true;
+    generate_CSS.disabled = true;
+    copy_CSS.disabled = true;
   }
 });
 
 // 上傳圖片後產生指定的模板文字
-upload.addEventListener("change", function (event) {
+upload_IMG.addEventListener("change", function (event) {
   const files = event.target.files;
   if (!files.length) return;
 
@@ -34,13 +33,13 @@ upload.addEventListener("change", function (event) {
   Array.from(files).forEach((file, index) => {
     const img = new Image();
     img.onload = function () {
-      generateTemplateHTML(file, img, result, index);
+      generateselect_TemplateHTML(file, img, result, index);
     };
     img.src = URL.createObjectURL(file);
   });
 });
 
-function generateTemplateHTML(file, img, result, index) {
+function generateselect_TemplateHTML(file, img, result, index) {
   // className使用檔名 BG_01.jpg => class="BG_01"
   const className = file.name.split(".").slice(0, -1).join(".");
 
@@ -67,22 +66,22 @@ function generateTemplateHTML(file, img, result, index) {
   result[index] = formattedText;
 
   // 產出結果放入output區並換行
-  output.value = result.join("\n");
+  textarea_HTML.value = result.join("\n");
 
   // 控制複製HTML按鈕
-  htmlcopy.disabled = false;
+  copy_HTML.disabled = false;
 
   // 控制CSS按鈕功能
   if (selectedMode === "component") {
-    cssButton.disabled = false;
+    generate_CSS.disabled = false;
   } else {
-    cssButton.disabled = true;
+    generate_CSS.disabled = true;
   }
 }
 
 // 產生CSS
-cssButton.addEventListener("click", () => {
-  const imagesArray = output.value.match(/<img[^>]+>/g);
+generate_CSS.addEventListener("click", () => {
+  const imagesArray = textarea_HTML.value.match(/<img[^>]+>/g);
   const result = imagesArray.map((img) => {
     const arr = img.split(" ");
     const className = arr[3].slice(0, -1);
@@ -109,34 +108,34 @@ cssButton.addEventListener("click", () => {
 
     return format;
   });
-  cssoutput.value = result.join("");
-  csscopy.disabled = false;
+  textarea_CSS.value = result.join("");
+  copy_CSS.disabled = false;
 });
 
 // 複製HTML Clipboard API
-htmlcopy.addEventListener("click", () => {
+copy_HTML.addEventListener("click", () => {
   navigator.clipboard.readText();
-  navigator.clipboard.writeText(output.value);
+  navigator.clipboard.writeText(textarea_HTML.value);
 
   setTimeout(() => {
-    htmlmessage.innerHTML = "複製成功😊";
+    sucessMessage_HTML.innerHTML = "複製成功😊";
   }, 500);
 
   setTimeout(() => {
-    htmlmessage.innerHTML = "";
+    sucessMessage_HTML.innerHTML = "";
   }, 2000);
 });
 
 // 複製CSS Clipboard API
-csscopy.addEventListener("click", () => {
+copy_CSS.addEventListener("click", () => {
   navigator.clipboard.readText();
-  navigator.clipboard.writeText(cssoutput.value);
+  navigator.clipboard.writeText(textarea_CSS.value);
 
   setTimeout(() => {
-    cssmessage.innerHTML = "複製成功😊";
+    sucessMessage_CSS.innerHTML = "複製成功😊";
   }, 500);
 
   setTimeout(() => {
-    cssmessage.innerHTML = "";
+    sucessMessage_CSS.innerHTML = "";
   }, 2000);
 });
