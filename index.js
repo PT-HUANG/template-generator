@@ -113,29 +113,31 @@ generate_CSS.addEventListener("click", () => {
 });
 
 // 複製HTML Clipboard API
-copy_HTML.addEventListener("click", () => {
-  navigator.clipboard.readText();
-  navigator.clipboard.writeText(textarea_HTML.value);
-
-  setTimeout(() => {
+copy_HTML.addEventListener("click", async () => {
+  await navigator.clipboard.writeText(textarea_HTML.value);
+  try {
     sucessMessage_HTML.innerHTML = "複製成功😊";
-  }, 500);
-
-  setTimeout(() => {
-    sucessMessage_HTML.innerHTML = "";
-  }, 2000);
+  } catch (err) {
+    console.error("複製失敗:", err);
+    sucessMessage_HTML.innerHTML = "複製失敗😢";
+  } finally {
+    setTimeout(() => {
+      sucessMessage_HTML.innerHTML = "";
+    }, 1000);
+  }
 });
 
 // 複製CSS Clipboard API
-copy_CSS.addEventListener("click", () => {
-  navigator.clipboard.readText();
-  navigator.clipboard.writeText(textarea_CSS.value);
-
-  setTimeout(() => {
+copy_CSS.addEventListener("click", async () => {
+  await navigator.clipboard.writeText(textarea_CSS.value);
+  try {
     sucessMessage_CSS.innerHTML = "複製成功😊";
-  }, 500);
-
-  setTimeout(() => {
-    sucessMessage_CSS.innerHTML = "";
-  }, 2000);
+  } catch (err) {
+    console.error("複製失敗:", err);
+    sucessMessage_CSS.innerHTML = "複製失敗😢";
+  } finally {
+    setTimeout(() => {
+      sucessMessage_CSS.innerHTML = "";
+    }, 1000);
+  }
 });
