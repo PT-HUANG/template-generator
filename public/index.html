@@ -12,8 +12,8 @@
   <div class="container">
     <h2>圖片上傳區</h2>
     <div class="selection">
-      <label for="template">選擇模板：</label>
-      <select id="template">
+      <label for="select_Template">選擇模板：</label>
+      <select id="select_Template">
         <option value="section">背景</option>
         <option value="component">元件</option>
       </select>
@@ -21,22 +21,22 @@
 
     <div class="workspace">
       <div>
-        <input type="file" id="upload" accept="image/*" multiple>
+        <input type="file" id="upload_IMG" accept="image/*" multiple>
         <div class="menu">
           <div>HTML結構</div>
-          <button id="copyButton_HTML" disabled>複製HTML</button>
+          <button id="copy_HTML" disabled>複製HTML</button>
           <div class="sucessMessage_HTML"></div>
         </div>
-        <textarea id="output" rows="30" cols="150"></textarea>
+        <textarea id="textarea_HTML" rows="30" cols="150"></textarea>
       </div>
       <div>
-        <button id="CSS_generator" disabled>產生CSS</button>
+        <button id="generate_CSS" disabled>產生CSS</button>
         <div class="menu">
           <div>CSS樣式</div>
-          <button id="copyButton_CSS" disabled>複製CSS</button>
+          <button id="copy_CSS" disabled>複製CSS</button>
           <div class="sucessMessage_CSS"></div>
         </div>
-        <textarea id="CSS_output" rows="30" cols="150"></textarea>
+        <textarea id="textarea_CSS" rows="30" cols="150"></textarea>
       </div>
     </div>
   </div>
