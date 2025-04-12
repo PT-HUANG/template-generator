@@ -1,0 +1,55 @@
+.container {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+}
+
+.selection,
+#upload_IMG,
+#generate_CSS {
+  margin: 1rem 0;
+}
+
+#upload_IMG {
+  width: 30%;
+}
+
+#select_Template {
+  width: 10%;
+  padding: 5px;
+}
+
+#generate_CSS {
+  width: fit-content;
+}
+
+#textarea_HTML,
+#textarea_CSS {
+  width: 80%;
+  margin: 1rem 0;
+}
+
+.workspace {
+  display: flex;
+}
+
+.menu {
+  width: 80%;
+  display: flex;
+  justify-content: start;
+}
+
+.menu>* {
+  margin-right: 1rem;
+}
+
+.sucessMessage_HTML {
+  font-weight: 700;
+  color: rgb(255, 90, 13);
+}
+
+.sucessMessage_CSS {
+  font-weight: 700;
+  color: rgb(175, 9, 252);
+}
